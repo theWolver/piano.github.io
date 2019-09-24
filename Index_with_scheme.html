@@ -1,0 +1,302 @@
+<!------------------------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the Piano training</title>
+    <link rel="stylesheet" type="text/css" href="./css/style_with_scheme.css"/>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script>
+        let my_array;
+        /*$.ajax({
+            url: "getArrayInitialization.php",
+            type: "GET",     //тип запроса: get,post либо head
+            success: function (response) {
+                my_array = JSON.parse(response);
+            },
+            error: function (response) {
+                $('#result').html(response);       //ТУТ ВОПРОС НАСЧЁТ НАЛИЧИЯ RETURN'A И ЧТО ВООБЩЕ БУДЕТ ВЫВОДИТЬ?
+            }
+        });
+        /*my_array=readCookie("arr");
+        function readCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }*/
+        my_array = "<? echo $arr ?>";
+    </script>
+    <script src="js/Get_MyArray.js"></script><!--заполняет значениями my_array в LocalStorage-->
+    <script src="js/scriptjava.js"></script>
+    <script src="js/screenfull.js"></script>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div id="img">
+            <div id="notes_staff"></div>
+            <div id="notes_staff_admin"><?php echo $style; ?></div>
+        </div>
+        <!--div class="table_result">
+            <table border="2">
+                <tr>
+                    <th>№ п/п</th>
+                    <th>Ответ</th>
+                </tr>
+            </table>
+        </div-->
+        <div id="account_name"><b>Добро пожаловать, <?php echo $name; ?></b></div>
+        <div id="table_result"></div>
+        <input type="text" name="current_user" title="current_user" value="<?=$_SESSION['id'];?>">
+        <input type="text" name="current_roots" title="current_roots" value="<?=$_SESSION['roots'];?>">
+    </div>
+    <div id="enter">
+        <div id="result">Тут будет ответ от сервера</div>
+        <audio id="player" src="sound/piano/first/00do1.wav"></audio>
+        <input class="form-control-submit" type="button" name="Submit" id="submit" value="submit"><?php echo $style1; ?>
+        <input class="form-control-submit" type="button" name="BackButton" id="back_button">
+        <input class="form-control-submit" type="button" name="ResetButton" id="reset_button" value="reset">
+        <input class="form-control-submit" type="button" name="SubmitButton" id="button" value="fullscreen">
+        <input class="form-control-submit" type="button" name="SubmitButtonHelp" id="help" value="help">
+        <label for="octave"></label>
+        <select class="form-control-submit" id="octave" style="margin-left: 20px;">
+            <option value="">Выберите раскладку</option>
+            <option value="1">1 октава: малая</option>
+            <option value="2">3 октавы: малая, 1-я, 2-я</option>
+            <option value="3">всё пианино</option>
+            <option value="4">edit: малая октава</option>
+            <option value="5">edit: 2-я октава</option>
+        </select>
+        <label for="composition"></label>
+        <select class="form-control-submit" id="composition" style="margin-left: 20px;" name="composition">
+            <option value="0">Выберите композицию</option>
+            <?include_once "include/My_composition.php"; ?>
+        </select>
+        <input class="form-control-submit" type="button" name="Exit" id="exit" value="exit">
+        <br/>
+    </div>
+    <div id="inner">
+        <!--========================================================================-->
+        <div class="piano">
+            <figure>
+                <svg class="every every_sharp" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2525 700" preserveAspectRatio="xMidYMid meet" >
+                    <image width="2525" height="700" xlink:href="images/keyboard1.png"></image>
+                    <!--little-->
+                    <polygon data-id="31"  points="801,58  832,58  832,235  845,235  845,301  801,301  801,58"  onclick="SendGet(31, 'sound/piano/little/00do1.wav');"></polygon>
+                    <polygon data-id="32"  points="862,58  879,58  879,235  895,235  895,301  848,301  848,235  862,235  862,58"   onclick="SendGet(32, 'sound/piano/little/02re1.wav');"></polygon>
+                    <polygon data-id="33"  points="910,58  945,58  945,301  898,301  898,235  910,235  910,58"  onclick="SendGet(33, 'sound/piano/little/04mi1.wav');"></polygon>
+                    <polygon data-id="34"  points="948,58  969,58  969,235  987,235  987,301  948,301  948,58"  onclick="SendGet(34, 'sound/piano/little/05fa1.wav');"></polygon>
+                    <polygon data-id="35"  points="1003,58 1019,58 1019,235 1034,235 1034,301 990,301  990,235  1003,235 1003,58"  onclick="SendGet(35, 'sound/piano/little/07sol1.wav');"></polygon>
+                    <polygon data-id="36"  points="1053,58 1069,58 1069,235 1084,235 1084,301 1037,301 1037,235 1053,235 1053,58"  onclick="SendGet(36, 'sound/piano/little/09la1.wav');"></polygon>
+                    <polygon data-id="37"  points="1103,58 1130,58 1130,301 1087,301 1087,235 1103,235 1103,58" onclick="SendGet(37, 'sound/piano/little/11si1.wav');"></polygon>
+
+                    <polygon fill="var(--sharp)" data-id="311" points="835,58  859,58  859,232  835,232"  onclick="SendGet(311, 'sound/piano/little/01do-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="321" points="882,58  907,58  907,232  882,232"  onclick="SendGet(321, 'sound/piano/little/03re-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="341" points="972,58  1000,58 1000,232 972,232"  onclick="SendGet(341, 'sound/piano/little/06fa-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="351" points="1022,58 1050,58 1050,232 1022,232" onclick="SendGet(351, 'sound/piano/little/08sol-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="361" points="1072,58 1100,58 1100,232 1072,232" onclick="SendGet(361, 'sound/piano/little/10la-diez1.wav');"></polygon>
+                    <!--first-->
+                    <polygon data-id="41"  points="1133,58 1160,58 1160,235 1176,235 1176,301 1133,301 1133,58"  onclick="SendGet(41, 'sound/piano/first/00do1.wav');"></polygon>
+                    <polygon data-id="42"  points="1192,58 1207,58 1207,235 1219,235 1219,301 1179,301 1179,235  1192,235 1192,58"  onclick="SendGet(42, 'sound/piano/first/02re1.wav');"></polygon>
+                    <polygon data-id="43"  points="1240,58 1272,58 1272,301 1222,301 1222,235 1240,235 1240,58"  onclick="SendGet(43, 'sound/piano/first/04mi1.wav');"></polygon>
+                    <polygon data-id="44"  points="1275,58 1297,58 1297,235 1319,235 1319,301 1275,301 1275,58"  onclick="SendGet(44, 'sound/piano/first/05fa1.wav');"></polygon>
+                    <polygon data-id="45"  points="1331,58 1347,58 1347,235 1363,235 1363,301 1322,301 1322,235  1331,235 1331,58"  onclick="SendGet(45, 'sound/piano/first/07sol1.wav');"></polygon>
+                    <polygon data-id="46"  points="1379,58 1397,58 1397,235 1413,235 1413,301 1366,301 1366,235  1379,235 1379,58"  onclick="SendGet(46, 'sound/piano/first/09la1.wav');"></polygon>
+                    <polygon data-id="47"  points="1431,58 1462,58 1462,301 1416,301 1416,235 1431,235 1431,58"  onclick="SendGet(47, 'sound/piano/first/11si1.wav');"></polygon>
+
+                    <polygon fill="var(--sharp)" data-id="411" points="1163,58 1189,58 1189,232 1163,232" onclick="SendGet(411, 'sound/piano/first/01do-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="421" points="1210,58 1237,58 1237,232 1210,232" onclick="SendGet(421, 'sound/piano/first/03re-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="441" points="1300,58 1328,58 1328,232 1300,232" onclick="SendGet(441, 'sound/piano/first/06fa-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="451" points="1350,58 1376,58 1376,232 1350,232" onclick="SendGet(451, 'sound/piano/first/08sol-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="461" points="1400,58 1428,58 1428,232 1400,232" onclick="SendGet(461, 'sound/piano/first/10la-diez1.wav');"></polygon>
+                    <!--second-->
+                    <polygon data-id="51"  points="1465,58 1494,58 1494,235 1508,235 1508,301 1465,301 1465,58"  onclick="SendGet(51, 'sound/piano/second/00do1.wav');"></polygon>
+                    <polygon data-id="52"  points="1526,58 1539,58 1539,235 1554,235 1554,301 1511,301 1511,235  1526,235 1526,58"  onclick="SendGet(52, 'sound/piano/second/02re1.wav');"></polygon>
+                    <polygon data-id="53"  points="1573,58 1601,58 1601,301 1557,301 1557,235 1573,235 1573,58"  onclick="SendGet(53, 'sound/piano/second/04mi1.wav');"></polygon>
+                    <polygon data-id="54"  points="1604,58 1629,58 1629,235 1648,235 1648,301 1604,301 1604,58"  onclick="SendGet(54, 'sound/piano/second/05fa1.wav');"></polygon>
+                    <polygon data-id="55"  points="1663,58 1679,58 1679,235 1698,235 1698,301 1651,301 1651,235  1663,235 1663,58"  onclick="SendGet(55, 'sound/piano/second/07sol1.wav');"></polygon>
+                    <polygon data-id="56"  points="1713,58 1729,58 1729,235 1743,235 1743,301 1701,301 1701,235  1713,235 1713,58"  onclick="SendGet(56, 'sound/piano/second/09la1.wav');"></polygon>
+                    <polygon data-id="57"  points="1761,58 1790,58 1790,301 1746,301 1746,235 1761,235 1761,58"  onclick="SendGet(57, 'sound/piano/second/11si1.wav');"></polygon>
+
+                    <polygon fill="var(--sharp)" data-id="511" points="1497,58 1523,58 1523,232 1497,232" onclick="SendGet(511, 'sound/piano/second/01do-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="521" points="1542,58 1570,58 1570,232 1542,232" onclick="SendGet(521, 'sound/piano/second/03re-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="541" points="1632,58 1660,58 1660,232 1632,232" onclick="SendGet(541, 'sound/piano/second/06fa-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="551" points="1682,58 1710,58 1710,232 1682,232" onclick="SendGet(551, 'sound/piano/second/08sol-diez1.wav');"></polygon>
+                    <polygon fill="var(--sharp)" data-id="561" points="1732,58 1758,58 1758,232 1732,232" onclick="SendGet(561, 'sound/piano/second/10la-diez1.wav');"></polygon>
+                    <!--third-->
+                    <polygon data-id="61" points="1793,58 1821,58 1821,235 1835,235 1835,301 1793,301 1793,58" onclick="SendGet(61, 'sound/piano/third/00do.wav');"></polygon>
+                    <!--little-->
+                    <g class="piano-item" data-id="31">
+                        <text x="810" y="268" class="piano-name">ДО</text>
+                        <text x="813" y="30" class="piano-popup">ДО малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="32">
+                        <text x="860" y="268" class="piano-name">РЕ</text>
+                        <text x="813" y="30" class="piano-popup">РЕ малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="33">
+                        <text x="907" y="268" class="piano-name">МИ</text>
+                        <text x="813" y="30" class="piano-popup">МИ малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="34">
+                        <text x="954" y="268" class="piano-name">ФА</text>
+                        <text x="813" y="30" class="piano-popup">ФА малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="35">
+                        <text x="993" y="268" class="piano-name" style="font-size:14px;">СОЛЬ</text>
+                        <text x="813" y="30" class="piano-popup">СОЛЬ малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="36">
+                        <text x="1048" y="268" class="piano-name">ЛЯ</text>
+                        <text x="813" y="30" class="piano-popup">ЛЯ малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="37">
+                        <text x="1096" y="268" class="piano-name">СИ</text>
+                        <text x="813" y="30" class="piano-popup">СИ малой октавы</text>
+                    </g>
+                    <!--little diez-->
+                    <g class="piano-item" data-id="311">
+                        <text x="845" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ДО#</text>
+                        <text x="813" y="30" class="piano-popup">ДО# малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="321">
+                        <text x="893" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">РЕ#</text>
+                        <text x="813" y="30" class="piano-popup">РЕ# малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="341">
+                        <text x="984" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ФА#</text>
+                        <text x="813" y="30" class="piano-popup">ФА# малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="351">
+                        <text x="1034" y="150" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">СОЛЬ#</text>
+                        <text x="813" y="30" class="piano-popup">СОЛЬ# малой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="361">
+                        <text x="1084" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ЛЯ#</text>
+                        <text x="813" y="30" class="piano-popup">ЛЯ# малой октавы</text>
+                    </g>
+                    <!--first-->
+                    <g class="piano-item" data-id="41">
+                        <text x="1144" y="268" class="piano-name">ДО</text>
+                        <text x="1145" y="30" class="piano-popup">ДО первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="42">
+                        <text x="1189" y="268" class="piano-name">РЕ</text>
+                        <text x="1145" y="30" class="piano-popup">РЕ первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="43">
+                        <text x="1233" y="268" class="piano-name">МИ</text>
+                        <text x="1145" y="30" class="piano-popup">МИ первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="44">
+                        <text x="1283" y="268" class="piano-name">ФА</text>
+                        <text x="1145" y="30" class="piano-popup">ФА первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="45">
+                        <text x="1322" y="268" class="piano-name" style="font-size:14px;">СОЛЬ</text>
+                        <text x="1145" y="30" class="piano-popup">СОЛЬ первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="46">
+                        <text x="1376" y="268" class="piano-name">ЛЯ</text>
+                        <text x="1145" y="30" class="piano-popup">ЛЯ первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="47">
+                        <text x="1426" y="268" class="piano-name">СИ</text>
+                        <text x="1145" y="30" class="piano-popup">СИ первой октавы</text>
+                    </g>
+                    <!--first diez-->
+                    <g class="piano-item" data-id="411">
+                        <text x="1175" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ДО#</text>
+                        <text x="1145" y="30" class="piano-popup">ДО# первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="421">
+                        <text x="1222" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">РЕ#</text>
+                        <text x="1145" y="30" class="piano-popup">РЕ# первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="441">
+                        <text x="1312" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ФА#</text>
+                        <text x="1145" y="30" class="piano-popup">ФА# первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="451">
+                        <text x="1362" y="150" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">СОЛЬ#</text>
+                        <text x="1145" y="30" class="piano-popup">СОЛЬ# первой октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="461">
+                        <text x="1412" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ЛЯ#</text>
+                        <text x="1145" y="30" class="piano-popup">ЛЯ# первой октавы</text>
+                    </g>
+                    <!--second-->
+                    <g class="piano-item" data-id="51">
+                        <text x="1474" y="268" class="piano-name">ДО</text>
+                        <text x="1485" y="30" class="piano-popup">ДО второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="52">
+                        <text x="1521" y="268" class="piano-name">РЕ</text>
+                        <text x="1485" y="30" class="piano-popup">РЕ второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="53">
+                        <text x="1564" y="268" class="piano-name">МИ</text>
+                        <text x="1485" y="30" class="piano-popup">МИ второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="54">
+                        <text x="1613" y="268" class="piano-name">ФА</text>
+                        <text x="1485" y="30" class="piano-popup">ФА второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="55">
+                        <text x="1655" y="268" class="piano-name" style="font-size:14px;">СОЛЬ</text>
+                        <text x="1485" y="30" class="piano-popup">СОЛЬ второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="56">
+                        <text x="1710" y="268" class="piano-name">ЛЯ</text>
+                        <text x="1485" y="30" class="piano-popup">ЛЯ второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="57">
+                        <text x="1754" y="268" class="piano-name">СИ</text>
+                        <text x="1485" y="30" class="piano-popup">СИ второй октавы</text>
+                    </g>
+                    <!--second diez-->
+                    <g class="piano-item" data-id="511">
+                        <text x="1509" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ДО#</text>
+                        <text x="1485" y="30" class="piano-popup">ДО# второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="521">
+                        <text x="1554" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">РЕ#</text>
+                        <text x="1485" y="30" class="piano-popup">РЕ# второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="541">
+                        <text x="1644" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ФА#</text>
+                        <text x="1485" y="30" class="piano-popup">ФА# второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="551">
+                        <text x="1694" y="150" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">СОЛЬ#</text>
+                        <text x="1485" y="30" class="piano-popup">СОЛЬ# второй октавы</text>
+                    </g>
+                    <g class="piano-item" data-id="561">
+                        <text x="1744" y="180" class="piano-name" style="font-size:14px; fill: var(--sharp); writing-mode: vertical-rl; glyph-orientation-vertical: 90; text-orientation: upright;">ЛЯ#</text>
+                        <text x="1485" y="30" class="piano-popup">ЛЯ# второй октавы</text>
+                    </g>
+                    <!--third-->
+                    <g class="piano-item" data-id="61">
+                        <text x="1800" y="268" class="piano-name">ДО</text>
+                        <text x="1814" y="30" class="piano-popup">ДО третьей октавы</text>
+                    </g>
+                </svg>
+            </figure>
+        </div>
+    </div>
+</div>
+<div id="authorization_msg" class="run-animation">Пожалуйста, авторизуйтесь на сайте!</div>
+<script src="js/Get_array_Composition.js"></script><!--позволяет получить коорд. массива нот из Composition и визуализирует по ним note_staff-->
+<script src="js/ChangeComposition.js"></script><!--обработка select для Composition-->
+<script type="text/javascript" src="js/Visualization.js"></script><!--визуализирует всё, что касается polygon-->
+<script src="js/FullScreen_and_Help.js"></script><!--обработка кнопок FullScreen и Help-->
+<script src="js/SendData.js"></script><!--обработка ф-ции SendData и AJAX-запроса в ней-->
+<script src="js/Select_note_position.js"></script><!--определяет координаты нот, при нажатии админом на их местоположение на картинке, чтобы потом занести их в базу данных-->
+<script src="js/Exit.js"></script><!--обработка кнопки Exit-->
+</body>
+</html>
