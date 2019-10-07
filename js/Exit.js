@@ -16,7 +16,7 @@ function showIntro() {
         //response:'text',//тип возвращаемого ответа text либо xml
         success: function () {  //возвращаемый результат от сервера
            // $('#table_result').html(data);
-            window.open('Intro.html',"_self");  //_self - открывает новый html в том же окне
+            window.open('index.html',"_self");  //_self - открывает новый html в том же окне
         },
         error: function (data) {
             $('#result').html(data);
