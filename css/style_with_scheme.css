@@ -1,0 +1,282 @@
+body,html {
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+}
+
+/*===============================================*/
+.piano {
+    height: 700px;
+    /*width: 2525px;*/
+    margin: 0 auto;
+    position: relative;
+
+    min-height:500px;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out;
+}
+/* http://jsfiddle.net/hx5Th/11/   http://qaru.site/questions/2008462/vertical-text-in-d3-not-rotated */
+.every {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*height: 700px;
+    width: 2525px;*/
+}
+.every_sharp {
+    cursor: pointer;
+    fill: #FFDBA4;
+    --sharp: black;
+}
+
+text {
+    fill: black;
+    --sharp: red;
+}
+
+.piano-item {
+    position: absolute;
+    cursor: pointer;
+    display: none;
+}
+
+.piano-name {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    line-height: 13px;
+    position: inherit;
+}
+.piano-popup {
+    display: none;
+    border: 1px solid #777;
+    padding: 10px;
+    width: 140px;
+    position: absolute;
+    font-size: 36px;
+    line-height: 14px;
+    background: #fff;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-align: left;
+   /* top: 35px;
+    left: 575px;*/
+}
+.piano polygon:hover, #hover {
+    fill: #ffc70b;
+}
+.piano polygon.active {
+    fill: lime !important; /*#FF8C0B*/
+    stroke: blue;
+    stroke-width: 5;
+    opacity: 0.9;
+}
+.piano-name:active {
+    fill: lime !important; /*#FF8C0B*/
+    stroke: blue;
+    stroke-width: 5;
+    opacity: 0.9;
+}
+
+#table_result{
+    position: absolute;
+    left:0;
+    top:0;
+    margin: 10px;
+    background-color: chartreuse;
+}
+
+#account_name{
+    position: absolute;
+    right:0;
+    top:0;
+    margin-right: 25px;
+    color: blue;
+}
+
+.article {
+    width: 100%;
+    background-color: #F9F9F9;
+    font-family: Arial, "Bitstream Vera Sans" ,Helvetica,Verdana,sans-serif;
+    color: #333;
+    margin-top: 3px;
+    border: 2px solid blueviolet;
+    border-collapse: collapse; /*Линия между ячейками отображается только одна*/
+}
+
+.article td, table.article th {
+    border-top-color: white;
+   /* border-bottom: 1px solid #DFDFDF;*/
+    color: #555;
+}
+/*.article th {
+    text-shadow: 0, 1px, 0, rgba(255, 255, 255, 0.796875);
+    font-family: Arial, "Bitstream Vera Sans" ,Helvetica,Verdana,sans-serif;
+    font-weight: bold;
+    padding: 7px 7px 8px;
+    text-align: left;
+    line-height: 1.3em;
+    font-size: 12px;
+    background: #E3F2D4;
+    border-right: 1px solid #DFDFDF;
+}*/
+
+.article td {
+    font-size: 12px;
+    padding: 7px 7px 7px;
+    vertical-align: top;
+    border: 2px solid blueviolet;/*#DFDFDF;*/
+    width: 40px;
+}
+
+
+
+/*===============================================*/
+#outer {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 90%; /* контейнер не превышает 90% ширины экрана */
+    /*min-width: 500px;*/
+    height: 100vh;
+    /*position: absolute;*/
+}
+
+div img{
+   /* width: 100%;
+    max-width: 100%;*/
+    height: auto;
+}
+
+#inner{
+    overflow-y: scroll;
+    /*height:340px;*/
+    height: 45%;
+    width:100%;
+    border: 2px solid blue;
+    position: relative;
+}
+
+#img{
+    background: url(../images/We_are_the_Champions.jpg) no-repeat top center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    /*min-height:2000px; //если раскомментить - то надо добавить и в Composition()*/
+    padding-bottom: 115%;
+    /*position: fixed;*/
+}
+
+#notes_staff{
+    display: none;
+    width: 15px;
+    height: 75px;
+    background-color: chartreuse;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    position: relative;
+}
+
+#notes_staff_admin{
+    display: none;
+    width: 15px;
+    height: 75px;
+    background-color: blue;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    position: relative;
+}
+#back_button{
+    width: 40px;
+    background: url(../images/back.jpg) no-repeat center center;
+    background-size: contain;
+}
+#submit
+{
+    display: none;
+}
+
+#enter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /*height: 80px;*/
+    height: 10%;
+    background-color: lightgray;
+}
+
+/*.piano:hover {
+    margin-top: -40px;
+   /* margin-left: -45px;*/
+/*  transform-origin: top center; /*задает точку, относительно которой будут происходить трансформации элемента*/
+/*   -webkit-transform: scale(2.5);
+    -moz-transform: scale(2.5);
+    -o-transform: scale(2.5);
+}*/
+.piano:hover .piano_white {
+    display: block;
+    background-color: white;
+    width: 800px;/*358px;*/
+    height: 70%;
+    border: 1px solid blue;
+    position:absolute;
+    z-index: 10;
+}
+
+#result{
+    /*border: 2px solid red;*/
+    /*font-family: "Times New Roman";*/
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.form-control-submit{
+    margin-left: 20px;
+    height: calc(2.5rem + 2px);
+}
+
+#authorization_msg{
+    display: none;
+    border: 1px solid blue;
+    background: chartreuse;
+    position: absolute; /* or fixed */
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    font-size: 190%;
+    text-align: center;
+    padding: 15px 35px 15px 35px;
+
+    /*позиционирование блока по центру, если мы не знаем ширину и высоту нашего блока*/
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.run-animation {
+    position: relative;
+    animation: my-animation 0s 3s forwards;
+}
+
+@keyframes my-animation {
+    from {
+        opacity : 1;
+    }
+    to {
+        opacity : 0;
+    }
+}
+
+.cbalink{
+    height: 0;
+    overflow: hidden;
+}
