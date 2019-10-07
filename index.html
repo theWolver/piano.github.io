@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Piano Training</title>
+    <link rel="stylesheet" type="text/css" href="./css/style_intro.css"/>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/Intro/jquery.backgroundvideo.min.js"></script> <!--скрипт для фонового видео с GitHub-->
+    <script src="js/Intro/setBackgroundVideo.js"></script> <!--устанавливает параметры для фонового видео-->
+</head>
+<body>
+<div id="header"> <!--https://racket.net.au/design/-->
+    <div class="inner_box">
+        <div class="nav_link_box" onclick="showBlockMenu('nav_box', 'inline-block', form, null)">
+            <a href="#" class="nav_link">Navigation</a>
+        </div>
+        <a href="#" id="logo">
+            <img src="images/logo.png" alt="">
+        </a>
+        <div class="icon_box">
+            <span>Someone</span>
+            <a href="#"><img src="images/icon_footer1.png" alt="Twitter"></a>
+            <a href="#"><img src="images/icon_footer2.png" alt="Facebook"></a>
+            <a href="#"><img src="images/icon_footer3.png" alt="Pinterest"></a>
+            <a href="#"><img src="images/icon_footer4.png" alt="Instagram"></a>
+        </div>
+    </div>
+    <div id="nav_box">
+        <div class="nav_inner">
+            <ul>
+                <li><a href="#" onclick="showBlockMenu('login_page', 'block', form, '1')">Enter</a></li>
+                <li><a href="#" onclick="showBlockMenu('login_page', 'block', form, '2')">Registration</a></li>
+                <li><a href="#">About site</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">...</a></li>
+            </ul>
+            <a href="#" class="close_nav" onclick="showBlockMenu('nav_box', 'inline-block', form, null)">CLOSE THIS</a>
+        </div>
+    </div>
+</div>
+<div id="login_page">
+    <div class="form">
+        <form id="login_form" action="#" method="get">
+            <input type="text" name="login" placeholder="Enter your login" autocomplete="login"/>
+            <input type="password" name="pass" placeholder="Enter your password" autocomplete="password"/>
+            <button type="submit" id="btn" value="Войти" name="log_in">Registration</button>
+        </form>
+    </div>
+</div>
+<div id="result_form" class="run-animation"></div>
+<div class="container">
+    <video class="my-background-video" loop autoplay muted poster="images/poster.jpg"><!--аттрибут playsinline временно удалил, т.к. вроде и без него работает всё-->
+        <source src="media/floating_musical_notes.mp4" type="video/mp4">
+    </video>
+</div>
+<script src="js/Intro/click.js"></script><!--обрабатывает нажатие на меню-->
+<script src="js/Intro/registration.js"></script><!--ajax-обработка формы регистрации-->
+<script src="js/Intro/authorization.js"></script><!--ajax-обработка формы авторизации-->
+</body>
+</html>
