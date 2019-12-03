@@ -10,21 +10,74 @@
 </head>
 <body>
 <div id="header"> <!--https://racket.net.au/design/-->
-    <div class="inner_box">
-        <div class="nav_link_box" onclick="showBlockMenu('nav_box', 'inline-block', form, null)">
-            <a href="#" class="nav_link">Navigation</a>
+    <div class="inner_box flex_container">
+        <div class="box">
+            <div class="nav_link_box" onclick="showBlockMenu('nav_box', 'inline-block', form, null)">
+                <a href="#" class="nav_link">Navigation</a>
+            </div>
         </div>
-        <div id="logo">
-            <a href="#">
-                <img src="images/logo.png" alt="">
-            </a>
-        </div>  
-        <div class="icon_box">
-            <span>Someone</span>
-            <a href="#"><img src="images/icon_footer1.png" alt="Twitter"></a>
-            <a href="#"><img src="images/icon_footer2.png" alt="Facebook"></a>
-            <a href="#"><img src="images/icon_footer3.png" alt="Pinterest"></a>
-            <a href="#"><img src="images/icon_footer4.png" alt="Instagram"></a>
+        <div class="box">
+            <div id="logo">
+                <a href="#">
+                    <img src="images/logo.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="box">
+            <div class="icon_box">
+                <!--span>Someone</span-->
+                <nav class="side containers">
+                    <div id="nav_hidden">
+                        <span>Someone</span>
+                        <a id="vb_pk" href="viber://chat?number=+380665679431" title="Viber"><img src="images/icon_footer11.png" alt="Viber"></a>
+                        <a id="vb_mb" href="viber://add?number=380665679431" title="Viber"><img src="images/icon_footer11.png" alt="Viber"></a>
+                        <a href="#"><img src="images/icon_footer2.png" alt="Facebook"></a>
+                        <a href="#"><img src="images/icon_footer3.png" alt="Pinterest"></a>
+                        <a href="#"><img src="images/icon_footer4.png" alt="Instagram"></a>
+                    </div>
+                    <div id="nav_show">
+                        <div id="close" class="menu">Someone</div>
+                            <ul class="menu" id="ul_someone">
+                                <li><a id="vb_pk" href="viber://chat?number=+380665679431" title="Viber"><img src="images/icon_footer11.png" alt="Viber"></a></li>
+                                <li><a id="vb_mb" href="viber://add?number=380665679431" title="Viber"><img src="images/icon_footer11.png" alt="Viber"></a></li>
+                                <li><a href="#"><img src="images/icon_footer2.png" alt="Facebook"></a></li>
+                                <li><a href="#"><img src="images/icon_footer3.png" alt="Pinterest"></a></li>
+                                <li><a href="#"><img src="images/icon_footer4.png" alt="Instagram"></a></li>
+                            </ul>
+                    </div>
+                </nav>
+                <script>
+                    // Захватываем наши элементы чтобы мы могли использовать их ниже
+                    let closeIcon = document.getElementById("close"),
+                        $container = $('.containers'),
+                        $list = $container.find('ul');
+
+                    // При нажатии на <span> раскрываем и скрываем наш <ul>
+                    let span_flag=0;
+                    $(closeIcon).on('click', function() {
+                        // если блок скрыт - раскрываем и span_flag=1
+                        if(span_flag===0) {
+                            $list.css("display", "block");
+                            $("#nav_show").css("margin-top", "318px");
+                            span_flag=1;
+                        }
+                        else
+                        {
+                            $("#nav_show").css("margin-top", "0");
+                            $list.css("display", "none");
+                            span_flag=0;
+                        }
+                    });
+                </script>
+
+
+
+                <!--a id="vb_pk" href="viber://chat?number=+380665679431" title="Viber"><img src="images/icon_footer11.png" alt="Viber"></a>
+                <a id="vb_mb" href="viber://add?number=380665679431" title="Viber"><img src="images/icon_footer11.png" alt="Viber"></a>
+                <a href="#"><img src="images/icon_footer2.png" alt="Facebook"></a>
+                <a href="#"><img src="images/icon_footer3.png" alt="Pinterest"></a>
+                <a href="#"><img src="images/icon_footer4.png" alt="Instagram"></a-->
+            </div>
         </div>
     </div>
     <div id="nav_box">
@@ -55,6 +108,7 @@
         <source src="media/floating_musical_notes.mp4" type="video/mp4">
     </video>
 </div>
+<script src="js/Intro/isMobile.js"></script><!--проверка через какой девайс зашёл юзер(ПК/мобилка)-->
 <script src="js/Intro/click.js"></script><!--обрабатывает нажатие на меню-->
 <script src="js/Intro/registration.js"></script><!--ajax-обработка формы регистрации-->
 <script src="js/Intro/authorization.js"></script><!--ajax-обработка формы авторизации-->
